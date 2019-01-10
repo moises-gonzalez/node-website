@@ -1,6 +1,7 @@
 const express = require('express');
-const app = express();
+const morgan = require('morgan');
 const path = require('path');
+const app = express();
 
 //settings
 app.set('port', 8070);
@@ -9,9 +10,10 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 
 // middlewares
+app.use(morgan('dev'));
 
 // routes
-app.use(require('./routes/'));
+app.use(require('./routes'));
 
 // static files
 app.use(express.static(path.join(__dirname, 'public')))
